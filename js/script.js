@@ -5,6 +5,7 @@ const suggBox = searchWrapper.querySelector(".autocom-box");
 const icon = searchWrapper.querySelector(".icon");
 let linkTag = searchWrapper.querySelector("a");
 let webLink;
+let inputs=[];
 
 // if user press any key and release
 inputBox.onkeyup = (e)=>{
@@ -40,10 +41,24 @@ inputBox.onkeyup = (e)=>{
 function select(element){
     let selectData = element.textContent;
     inputBox.value = selectData;
+ //   const selectlist=document.getElementsByClassName('selected')
+  
     icon.onclick = ()=>{
-        webLink = "https://www.google.com/search?q=" + selectData;
-        linkTag.setAttribute("href", webLink);
-        linkTag.click();
+        inputs=[...inputs,selectData]
+        console.log(inputs)
+       
+            
+            var para = document.createElement("p");
+            var text=document.createTextNode(inputs.length+'. '+inputs[inputs.length-1]);
+            para.appendChild(text)
+            
+            document.getElementById("select").appendChild(para); ;
+            
+        
+       
+        
+
+        
     }
     searchWrapper.classList.remove("active");
 }
@@ -57,4 +72,11 @@ function showSuggestions(list){
         listData = list.join('');
     }
     suggBox.innerHTML = listData;
+}
+
+function onSearchDis(l){
+    if(inputs.length<3){
+        alert("select more than two symptoms")
+    }
+    
 }
